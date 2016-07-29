@@ -1,0 +1,20 @@
+#!/bin/bash
+
+res=$(echo "lock|restart|logout|suspend|shutdown" | rofi -sep "|" -dmenu -i -p "" -bw 0 -bc "#ffffff" -bg "#2f343f" -fg "#fdfdfd" -hlbg "#2f343f" -hlfg "#5294e2" -separator-style none -width 20 -hide-scrollbar -location 3 -padding 30 -line-margin 5 -font "System San Francisco Display 16")
+
+if [ $res = "lock" ]; then
+    lock
+fi
+if [ $res = "logout" ]; then
+    i3-msg exit
+fi
+if [ $res = "suspend" ]; then
+    systemctl suspend
+fi
+if [ $res = "restart" ]; then
+    systemctl reboot
+fi
+if [ $res = "shutdown" ]; then
+    systemctl poweroff
+fi
+exit 0

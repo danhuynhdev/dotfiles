@@ -1,0 +1,11 @@
+#!/bin/bash
+
+INPUT_SOURCE=$(ibus engine)
+
+if [[ "${INPUT_SOURCE}" = "xkb:us::eng" ]]; then
+    ibus engine bogo
+    echo "VI"
+else
+    ibus engine xkb:us::eng
+    echo "EN"
+fi
