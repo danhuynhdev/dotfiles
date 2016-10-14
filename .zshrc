@@ -48,7 +48,7 @@ ZSH_CUSTOM=/home/danhuynh/zsh_custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian last-working-dir colored-man-pages history command-not-found cp extract autojump go node npm)
+plugins=(git debian colored-man-pages history extract autojump go)
 
 # User configuration
 
@@ -94,80 +94,11 @@ function __code {
 mkfile() { mkdir -p -- "$1" && touch -- "$1"/"$2" }
 
 alias code='__code'
-alias vimx='gnome-terminal -x zsh -c "vim; zsh"'
-alias agd='sudo $apt_pref $apt_upgr'
+alias vimx='xcfe4-terminal -x zsh -c "vim; zsh"'
 unalias ag
-
-[ -s "/home/danhuynh/.dnx/dnvm/dnvm.sh" ] && . "/home/danhuynh/.dnx/dnvm/dnvm.sh" # Load dnvm
 
 ### Added by the Heroku Toolbelt
 . /etc/profile.d/vte-2.91.sh
-
-###-begin-ng-completion###
-#
-# ng command completion script
-#
-# Installation: ng completion >> ~/.bashrc (or ~/.zshrc)
-#
-
-ng_opts='new init build serve generate autocomplete e2e format lint test version'
-init_opts='--dry-run --verbose --blueprint --skip-npm --skip-bower --name'
-new_opts='--dry-run --verbose --blueprint --skip-npm --skip-bower --skip-git --directory'
-build_opts='--environment --output-path --watch --watcher'
-serve_opts='--port --host --proxy --insecure-proxy --watcher --live-reload --live-reload-host
-            --live-reload-port --environment --output-path --ssl --ssl-key --ssl-cert'
-generate_opts='component directive pipe route service'
-test_opts='--watch --browsers --colors --log-level --port --reporters'
-
-if type complete &>/dev/null; then
-  _ng_completion() {
-    local cword pword opts
-
-    COMPREPLY=()
-    cword=${COMP_WORDS[COMP_CWORD]}
-    pword=${COMP_WORDS[COMP_CWORD - 1]}
-
-    case ${pword} in
-      ng) opts=$ng_opts ;;
-      i|init) opts=$init_opts ;;
-      new) opts=$new_opts ;;
-      b|build) opts=$build_opts ;;
-      s|serve|server) opts=$serve_opts ;;
-      g|generate) opts=$generate_opts ;;
-      test) opts=$test_opts ;;
-    esac
-
-    COMPREPLY=( $(compgen -W '${opts}' -- $cword) )
-
-    return 0
-  }
-  complete -o default -F _ng_completion ng
-elif type compctl &>/dev/null; then
-  _ng_completion () {
-    local words cword opts
-    read -Ac words
-    read -cn cword
-    let cword-=1
-
-    case $words[cword] in
-      ng) opts=$ng_opts ;;
-      i|init) opts=$init_opts ;;
-      new) opts=$new_opts ;;
-      b|build) opts=$build_opts ;;
-      s|serve|server) opts=$serve_opts ;;
-      g|generate) opts=$generate_opts ;;
-      test) opts=$test_opts ;;
-    esac
-
-    setopt shwordsplit
-    reply=($opts)
-    unset shwordsplit
-  }
-  compctl -K _ng_completion ng
-fi
-###-end-ng-completion###
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
 
 fancy-ctrl-z () {
     if [[ $#BUFFER -eq 0 ]]; then
@@ -180,3 +111,12 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+source virtualenvwrapper.sh
+
+eval "$(tmuxifier init -)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/danhuynh/.sdkman"
+[[ -s "/home/danhuynh/.sdkman/bin/sdkman-init.sh" ]] && source "/home/danhuynh/.sdkman/bin/sdkman-init.sh"

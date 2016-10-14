@@ -1,7 +1,13 @@
-export PATH="/home/danhuynh/.nvm/versions/node/v5.9.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+# Ubuntu make installation of Ubuntu Make binary symlink
+PATH=/home/danhuynh/.local/share/umake/bin:$PATH
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/bin:$PATH
+# Ubuntu make installation of Scala Lang
+export PATH=/usr/local/heroku/bin:$PATH
 export GOPATH=$HOME/Development/golang
 export GOROOT=$HOME/.local/share/umake/go/go-lang
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.composer/vendor/bin:$HOME/bin
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin
+export PATH=$HOME/.tmuxifier/bin:$PATH
+export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
 
 if [ -z "$SSH_CONNECTION" ]; then
    case $OSTYPE in

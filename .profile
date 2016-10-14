@@ -27,3 +27,7 @@ export QT_IM_MODULE=xim
 export XMODIFIERS=@im=ibus
 
 source $HOME/.zshenv
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/danhuynh/.sdkman"
+[[ -s "/home/danhuynh/.sdkman/bin/sdkman-init.sh" ]] && source "/home/danhuynh/.sdkman/bin/sdkman-init.sh"
